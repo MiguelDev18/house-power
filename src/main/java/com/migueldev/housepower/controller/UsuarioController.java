@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.migueldev.housepower.model.Usuario;
 import com.migueldev.housepower.service.IUsuarioService;
 import com.migueldev.housepower.util.Response;
 
-//@CrossOrigin(origins= {"http://localhost:4200"})
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 public class UsuarioController {
 	
@@ -24,23 +25,26 @@ public class UsuarioController {
 	private IUsuarioService usuarioService;
 	
 	@RequestMapping(value = "/get_users", method = RequestMethod.GET)
-	public @ResponseBody List<Usuario> mostrarUsuarios(){
+	public List<Usuario> mostrarUsuarios(){
 		
 		return usuarioService.mostrarListaUsuarios();
 	}
 	
 	@RequestMapping(value = "/save_user", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
 	public Response guardarUsuario(@RequestBody Usuario usuario) {
 		usuarioService.guardarUsuario(usuario);
 		
-		return new Response(HttpStatus.OK.value(), "Usuario guardado exitosamente");
+		return new Response(HttpStatus.OK.value(), "El Usuario " + usuario.getUsername() + " ha sido guardado exitosamente");
 		
 	}
 	
 	@RequestMapping(value = "/delete_user", method = RequestMethod.POST)
+	//@ResponseStatus(HttpStatus.NO_CONTENT)
 	public Response borrarUsuario(@RequestBody Usuario usuario) {
+		String username = usuarioService.mostrarUsuario(usuario.getId()).getUsername();
 		usuarioService.eliminarUsuario(usuario.getId());
-		return new Response(HttpStatus.OK.value(), "Usuario borrado exitosamente");
+		return new Response(HttpStatus.OK.value(), "El Usuario " + username + " ha sido borrado exitosamente");
 	}
 	
 }
