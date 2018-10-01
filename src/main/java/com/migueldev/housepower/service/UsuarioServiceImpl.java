@@ -16,18 +16,20 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	@Autowired
 	private UsuariosRepository usuariosRepo;
 	
+	//retornar lista de usuarios desde la base de datos
 	@Override
 	public List<Usuario> mostrarListaUsuarios() {
-		System.out.println(usuariosRepo.findAll());
 		return usuariosRepo.findAll();
 	}
 
+	//guardar hogar en la base de datos
 	@Override
 	public void guardarUsuario(Usuario usuario) {
 		usuariosRepo.save(usuario);
 		
 	}
 
+	//si existe el usuario con id: idUsuario, devuelve el usuario de lo contrario retorna null
 	@Override
 	public Usuario mostrarUsuario(int idUsuario) {
 		Optional<Usuario> usuario = usuariosRepo.findById(idUsuario);
@@ -36,12 +38,14 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		return null;
 	}
 
+	//eliminar usuario en la base de datos
 	@Override
 	public void eliminarUsuario(int idUsuario) {
 		usuariosRepo.deleteById(idUsuario);
 		
 	}
 
+	//devolver el usuario de acuerdo a su username
 	@Override
 	public Usuario mostrarUsuario(String username) {
 		

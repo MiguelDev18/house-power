@@ -7,5 +7,6 @@ import com.migueldev.housepower.model.RoleUsuario;
 
 
 public interface RolesUsuarioRepository extends JpaRepository<RoleUsuario, Integer>{
+	//verificar en si el usuario existe en la base de datos
 	public boolean existsByUsername(String username);
 }

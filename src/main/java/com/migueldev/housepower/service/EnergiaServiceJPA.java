@@ -21,6 +21,7 @@ public class EnergiaServiceJPA implements IEnergiaService{
 		return energiaRepo.findByHogar_IdOrderByDiaAsc(idHogar);
 	}
 
+	//guardar dato de consumo en la base de datos
 	@Override
 	public void insertarDato(Energia energia) {
 		energiaRepo.save(energia);

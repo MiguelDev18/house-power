@@ -18,13 +18,10 @@ public class Usuario {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	//@Column(name="nombre",length=100)
 	private String nombre;
 	
-	//@Column(name="email",length=45)
 	private String email;
 	
-	//@Column(name="telefono",length=45)
 	private String telefono;
 	
 	private String username;
